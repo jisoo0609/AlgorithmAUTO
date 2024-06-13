@@ -7,25 +7,21 @@ import java.util.Queue;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         int n = Integer.parseInt(br.readLine());
 
-        Queue<Integer> cards = new LinkedList<>();
+        Queue<Integer> queue = new LinkedList<>();
 
-        // for를 이용해 1~N까지의 N개의 숫자를 Queue에 넣는다
         for (int i = 1; i <= n; i++) {
-            cards.offer(i);
+            queue.offer(i);
         }
-
-        // Queue의 크기가 1보다 클 동안
-        while (cards.size() > 1) {
-            // Queue의 제일 앞의 아이템을 버리고
-            cards.remove();
-            // 그 다음 앞의 아이템을 빼서
-            int item = cards.poll();
-            // 제일 뒤로 넣는다
-            cards.offer(item);
+        
+        while (queue.size() > 1) {
+            // 제일 위의 카드 버림
+            queue.poll();
+            // 그 다음 남은 카드를 밑으로 옮긴다
+            queue.offer(queue.poll());
         }
-        // 마지막 남은 아이템을 출력한다
-        System.out.println(cards.poll());
+        System.out.println(queue.peek());
     }
 }
