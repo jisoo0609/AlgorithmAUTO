@@ -5,24 +5,29 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        // 거스름돈
-        int change = Integer.parseInt(br.readLine());
+
+        // 거스름돈 액수
+        int n = Integer.parseInt(br.readLine());
+
         // 거슬러 줄 수 없는 경우
-        if (change == 1 || change == 3) System.out.println(-1);
-        // 5짜리로 다 거슬러 주면 짝수 금액이 남는 경우
-        else if ((change % 5) % 2 == 0) {
-            // 5짜리로 쓸 수 있는 만큼
-            int fives = change / 5;
-            // 남은걸 2로
-            int twos = (change % 5) / 2;
+        // 2, 5원으로만 거슬러 주기 가능 -> 액수 1원, 3원인경우 거스름돈 불가
+        if (n == 1 || n == 3) {
+            System.out.println(-1);
+        }
+
+        // 5원으로 거슬러준 후 거스름돈이 짝수가 남은 경우
+        else if((n % 5) % 2 == 0) {
+            // 5원 거스름돈 개수
+            int fives = n / 5;
+            // 2원 개수
+            int twos = (n % 5) / 2;
             System.out.println(fives + twos);
         }
-        // 5짜리로 다 거슬러 주면 홀수 금액이 남는 경우
-        else {
-            // 5짤리로 쓸 수 있는 만큼 -1 (해야 남는 돈을 2원으로 거스를 수 있음)
-            int fives = change / 5 - 1;
-            // 남은걸 2로
-            int twos = ((change % 5) + 5) / 2;
+
+        // 5원으로 거슬러준 후 거스름돈이 홀수가 남은 경우
+        else if ((n % 5) % 2 == 1) {
+            int fives = n / 5 - 1;
+            int twos = ((n % 5) + 5) / 2;
             System.out.println(fives + twos);
         }
     }
