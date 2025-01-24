@@ -4,7 +4,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
@@ -63,7 +64,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (map[i][j] != 0 && !visited[i][j]) {
-                    dfs(i, j, visited);
+                    bfs(i, j, visited);
                     count++;
                 }
             }
@@ -112,6 +113,26 @@ public class Main {
                 if (checkBounds(nextX, nextY) && map[nextX][nextY] > 0 && !visited[nextX][nextY]) {
                     visited[nextX][nextY] = true;
                     toVisit.push(new int[]{nextX, nextY});
+                }
+            }
+        }
+    }
+    
+    private static void bfs(int x, int y, boolean[][] visited) {
+        Queue<int[]> toVisit = new LinkedList<>();
+        toVisit.add(new int[]{x, y});
+        visited[x][y] = true;
+        
+        while (!toVisit.isEmpty()) {
+            int[] cur = toVisit.poll();
+            
+            for (int i = 0; i < 4; i++) {
+                int nextX = cur[0] + dx[i];
+                int nextY = cur[1] + dy[i];
+                
+                if (checkBounds(nextX, nextY) && map[nextX][nextY] > 0 && !visited[nextX][nextY]) {
+                    visited[nextX][nextY] = true;
+                    toVisit.add(new int[]{nextX, nextY});
                 }
             }
         }
