@@ -4,13 +4,18 @@ class Solution {
     public int solution(String before, String after) {
         int answer = 0;
         
-        String[] beforeArr = before.split("");
-        String[] afterArr = after.split("");
+        int[] beforeAlp = new int[26];
+        int[] afterAlp = new int[26];
         
-        Arrays.sort(beforeArr);
-        Arrays.sort(afterArr);
+        for (int i = 0; i < before.length(); i++) {
+            beforeAlp[before.charAt(i) - 'a']++;
+        }
         
-        if (Arrays.equals(beforeArr, afterArr)) {
+        for (int i = 0; i < after.length(); i++) {
+            afterAlp[after.charAt(i) - 'a']++;
+        }
+        
+        if (Arrays.equals(beforeAlp, afterAlp)) {
             answer = 1;
         }
         
