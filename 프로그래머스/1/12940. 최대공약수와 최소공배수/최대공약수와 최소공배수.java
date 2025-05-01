@@ -15,7 +15,7 @@ class Solution {
         if (Math.max(n, m) % Math.min(n, m) == 0) {
             lcm = Math.max(n, m);
         } else if (n % gcd == 0 && m % gcd == 0) {
-            lcm = gcd * (n/gcd) * (m/gcd);
+            lcm = n * m / gcd;
         } else {
             lcm = n * m;
         }
