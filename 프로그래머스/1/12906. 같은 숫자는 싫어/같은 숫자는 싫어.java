@@ -3,15 +3,20 @@ import java.util.*;
 public class Solution {
     public int[] solution(int []arr) {
         Stack<Integer> stack = new Stack<>();
-
-        // 스택에 arr 원소 집어넣음
+        
         for (int i = 0; i < arr.length; i++) {
+            int now = arr[i];
             if (stack.isEmpty()) {
-                stack.push(arr[i]);
-            } else if (stack.peek() != arr[i]) {
-                stack.push(arr[i]);
+                stack.push(now);
+            } else if (stack.peek() != now) {
+                stack.push(now);
             }
         }
-        return stack.stream().mapToInt(Integer::intValue).toArray();
+        
+        int[] answer = stack.stream()
+                        .mapToInt(Integer::intValue)
+                        .toArray();
+    
+        return answer;
     }
 }
