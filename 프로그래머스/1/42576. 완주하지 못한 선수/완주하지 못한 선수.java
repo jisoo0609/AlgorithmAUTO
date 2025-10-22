@@ -1,28 +1,27 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        StringBuilder answer = new StringBuilder();
-
         Map<String, Integer> map = new HashMap<>();
-
-        for (String s : participant) {
-            map.put(s, map.getOrDefault(s, 0) + 1);
-        }
-
-        for (String c : completion) {
-            map.put(c, map.get(c)-1);
+        
+        // 1. map에 참여자 기록
+        for (String p : participant) {
+            map.put(p, map.getOrDefault(p, 0) + 1);
         }
         
+        // 2. 완주자 기록 -> 완주한 경우 -1
+        for (String c : completion) {
+            map.put(c, map.get(c) - 1);
+        }
+        
+        String answer = "";
+        // 3. map에서 Value값이 0이 아닌 사람 기록
         for (String key : map.keySet()) {
             if (map.get(key) != 0) {
-                answer.append(key);
+                answer += key;
             }
         }
         
-        return answer.toString();
+        return answer;
     }
 }
